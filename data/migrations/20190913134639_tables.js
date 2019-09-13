@@ -42,7 +42,7 @@ exports.up = function(knex) {
         tbl
             .text('description')
     })
-    .createTable('accessResource', tbl => {
+    .createTable('accessResources', tbl => {
         tbl.increments();
         tbl
             .integer('resource_id')
