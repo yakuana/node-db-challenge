@@ -1,13 +1,21 @@
-const db = require('../data/projectss-config.js'); 
+const db = require('../data/projects-config.js'); 
 
 module.exports = {
     getProjects,
     getTasks,
-    getResources
+    getResources, 
+    addProject,
+    addTask,
+    addResource
 }
 
 function getProjects() {
     return db('projects'); 
+}
+
+function addProject(new_project) {
+    return db('projects')
+        .insert(new_project, 'id')
 }
 
 function getTasks(project_id) {
@@ -18,9 +26,19 @@ function getTasks(project_id) {
         .select('projects.project_name', 'projects.description', 'tasks.task_name', 'tasks.description', 'tasks.notes', 'tasks.completed')
 }
 
+function addTask(new_task) {
+    return db('tasks')
+        .insert(new_task, 'id')
+}
+
 function getResources(project_id) {
     return db('resources')
         .join('accessResources', 'resources.id', 'accessResources.resource_id')
         .where({ project_id })
         .select('resources.resource_name', 'resources.description')
+}
+
+function addResource(new_resource) {
+    return db('resources')
+        .insert(new_resource, 'id')
 }
