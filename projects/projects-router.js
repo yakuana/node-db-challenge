@@ -15,25 +15,17 @@ router.get('/', (req, res) => {
                 error: err 
             });
         });
-  });
-  
-router.get('/:id/projects', (req, res) => {
-    const { id } = req.params;
-  
-    db.getResources(id)
-        .then(resource => {
-            if (resource) {
-                res.status(200).json(resource);
-            } else {
-                res.status(404).json({ 
-                    message: 'Could not find resource with given id.' 
-                })
-            }
+  });  
+
+router.get('/tasks', (req, res) => {
+    db.getTasks()
+        .then(tasks => {
+            res.status(200).json(tasks)
         })
         .catch(err => {
             res.status(500).json({ 
-                message: 'Failed to get shopping list', 
-                error: err
+                message: 'Failed to get tasks', 
+                error: err 
             });
         });
 });
@@ -41,7 +33,7 @@ router.get('/:id/projects', (req, res) => {
 router.get('/:id/tasks', (req, res) => {
     const { id } = req.params;
 
-    recipeDB.getTasks(id)
+    db.getTasksById(id)
         .then(tasks => {
             if (steps.length) {
                 res.status(200).json(tasks);
@@ -58,5 +50,84 @@ router.get('/:id/tasks', (req, res) => {
             });
         });
 });
+
+router.get('/resources', (req, res) => {
+    db.getResources()
+        .then(resources => {
+            res.status(200).json(resources)
+        })
+        .catch(err => {
+            res.status(500).json({ 
+                message: 'Failed to get resources', 
+                error: err 
+            });
+        });
+});
+
+router.get('/:id/resources', (req, res) => {
+    const { id } = req.params;
+
+    db.getResourcesById(id)
+        .then(resources => {
+            if (resources.length) {
+                res.status(200).json(resources);
+            } else {
+                res.status(404).json({ 
+                    message: 'Could not find resources for given project' 
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ 
+                message: 'Failed to get resources', 
+                error: err 
+            });
+        });
+});
+
+router.post('/', (req, res) => {
+    const newProject = req.body;
+  
+    db.add(newProject)
+        .then(project => {
+            res.status(201).json(project);
+        })
+        .catch (err => {
+            res.status(500).json({ 
+                message: 'Failed to create new project', 
+                error: err
+            });
+        });
+  });
+  
+  router.post('/new-task', (req, res) => {
+    const newTask = req.body;
+
+    db.addTask(newTask)
+        .then(task => {
+            res.status(201).json(task);
+        })
+        .catch (err => {
+            res.status(500).json({ 
+                message: 'Failed to create new step',
+                error: err,
+            });
+        });
+  });
+
+  router.post('/new-resource', (req, res) => {
+    const newResource = req.body;
+
+    db.addResource(newResource)
+        .then(resource => {
+            res.status(201).json(resource);
+        })
+        .catch (err => {
+            res.status(500).json({ 
+                message: 'Failed to create new resource',
+                error: err,
+            });
+        });
+  });
 
 module.exports = router;
