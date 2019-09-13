@@ -20,6 +20,7 @@ function addProject(new_project) {
         .insert(new_project, 'id')
 }
 
+
 function getTasks() {
     return db('tasks'); 
 }
@@ -31,6 +32,8 @@ function getTasksById(project_id) {
         .where({ project_id })
         .select('projects.project_name', 'projects.description', 'tasks.task_name', 'tasks.description', 'tasks.notes', 'tasks.completed')
 }
+
+
 
 function addTask(new_task) {
     return db('tasks')
