@@ -24,6 +24,10 @@ exports.up = function(knex) {
             .onUpdate('CASCADE')
             .onDelete('CASCADE');
         tbl
+            .text('task_name')
+            .unique()
+            .notNullable();
+        tbl
             .text('description')
             .notNullable();
         tbl
@@ -49,7 +53,7 @@ exports.up = function(knex) {
             .unsigned()
             .notNullable()
             .references('id')
-            .inTable('resource')
+            .inTable('resources')
             .onUpdate('CASCADE')
             .onDelete('CASCADE');
         tbl
@@ -65,8 +69,8 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists('projects')
-        .dropTableIfExists('tasks')
+        .dropTableIfExists('accessResource')
         .dropTableIfExists('resources')
-        .dropTableIfExists('accessResource');
+        .dropTableIfExists('tasks')
+        .dropTableIfExists('projects');
 };

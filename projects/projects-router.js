@@ -35,7 +35,7 @@ router.get('/:id/tasks', (req, res) => {
 
     db.getTasksById(id)
         .then(tasks => {
-            if (steps.length) {
+            if (tasks.length) {
                 res.status(200).json(tasks);
             } else {
                 res.status(404).json({ 
@@ -88,7 +88,7 @@ router.get('/:id/resources', (req, res) => {
 router.post('/', (req, res) => {
     const newProject = req.body;
   
-    db.add(newProject)
+    db.addProject(newProject)
         .then(project => {
             res.status(201).json(project);
         })

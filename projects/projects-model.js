@@ -34,7 +34,6 @@ function getTasksById(project_id) {
 }
 
 
-
 function addTask(new_task) {
     return db('tasks')
         .insert(new_task, 'id')
