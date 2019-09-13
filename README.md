@@ -60,15 +60,15 @@ Take the steps necessary to complete the project from scratch. Start by initiali
 
 Complete the following tasks:
 
-- [ ] Design the data model and use _knex migrations_ to create the database and tables.
+- [x] Design the data model and use _knex migrations_ to create the database and tables.
 - [ ] Build an API with endpoints for:
   - [ ] adding resources.
-  - [ ] retrieving a list of resources.
+  - [x] retrieving a list of resources.
   - [ ] adding projects.
-  - [ ] retrieving a list of projects.
+  - [x] retrieving a list of projects.
   - [ ] adding tasks.
-  - [ ] retrieving a list of tasks. **The list of tasks should include the project name and project description**.
-- [ ] When returning `project` or `task` information, the `completed` property should be `true` or `false`.
+  - [x] retrieving a list of tasks. **The list of tasks should include the project name and project description**.
+- [x] When returning `project` or `task` information, the `completed` property should be `true` or `false`.
 
 For example, instead of returning a `task` that looks like this:
 
@@ -92,9 +92,9 @@ The API should return:
 
 ### Business Rules
 
-- a `project` can have multiple `tasks`.
-- a `task` belongs to only one `project`.
-- a `project` can use multiple `resources`.
+- [x] a `project` can have multiple `tasks`.
+- [x] a `task` belongs to only one `project`.
+- [x] a `project` can use multiple `resources`.
 - the same `resource` can be used in multiple `projects`.
 - [x] when adding `projects` the client must provide a name, the description is optional.
 - [x] when adding `resources` the client must provide a name, the description is optional.
